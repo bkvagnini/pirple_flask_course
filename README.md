@@ -1,0 +1,1 @@
+This repo is for the Full Stack with Flask Pirple.com course.
