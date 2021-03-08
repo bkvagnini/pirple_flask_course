@@ -10,9 +10,9 @@ def home():
         password = request.form['password']
         #this will normally go into a db
         if username == "Gordon" and password == "Ramsay":
-            return render_template('index.html', message = 'Login Successful')
+            return render_template('index2.html', message = 'Login Successful')
         else:
-            error_message = 'Hint: He curses a lot.'
+            error_message = 'You have provided the wrong username and password combination...'
             return render_template('index.html', message = error_message)
 
 @app.route('/about', methods = ['GET'])
