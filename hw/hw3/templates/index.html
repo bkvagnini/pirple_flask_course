@@ -1,0 +1,13 @@
+{% extends "structure.html" %}
+{% block main %}
+        <h1>Want to use the ToDo App?</h1> 
+
+        <form action = "/" method = "post">
+            <input placeholder = 'Username' name = "username" type = "text">
+            <input placeholder = 'Password' name = "password" type = "password">
+            <input type = "submit">
+        </form>
+        <p>{{ message }}</p>
+
+
+  {% endblock main %}
