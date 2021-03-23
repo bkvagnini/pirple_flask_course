@@ -16,3 +16,18 @@ def show_color(username):
 
     message = " '{username}'s favorite color is '{color}' ".format(username = username, color = color)
     return message
+
+def check_pw(username):
+    #connect the db
+    connection = sqlite3.connect('Flask_tut.db', check_same_thread = False)
+    cursor = connection.cursor()
+    
+    # SQL Query
+    cursor.execute(""" SELECT password FROM users WHERE username = '{username}' ORDER BY pk DESC;""".format(username = username))
+    password = cursor.fetchone()[0]
+
+    #close the DB connection
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return password

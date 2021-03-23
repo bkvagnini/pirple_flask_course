@@ -10,9 +10,12 @@ def home():
         username = request.form['username']
         password = request.form['password']
         #this will normally go into a db
-        if username == "Gordon" and password == "Ramsay":
-            message = model.show_color('Gordon') 
-            #this is pulling color from db based on user
+        db_password = model.check_pw(username)
+        if password == db_password:
+        #if username == "Gordon" and password == "Ramsey":
+            #message = model.show_task('Gordon')
+            message = model.show_color(username) 
+            #this is pulling task from db based on user
             #return render_template('index2.html', message = 'Login Successful')
             return render_template('index2.html', message = message)
         else:

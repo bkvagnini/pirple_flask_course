@@ -10,8 +10,11 @@ def home():
         username = request.form['username']
         password = request.form['password']
         #this will normally go verify against a db
-        if username == "Gordon" and password == "Ramsay":
-            message = model.show_task('Gordon') 
+        db_password = model.check_pw(username)
+        if password == db_password:
+        #if username == "Gordon" and password == "Ramsay":
+            #message = model.show_task('Gordon')
+            message = model.show_task(username) 
             #this is pulling task from db based on user
             return render_template('profile.html', message = message)
         else:
