@@ -22,6 +22,18 @@ def home():
             error_message = 'You have provided the wrong username and password combination...'
             return render_template('index.html', message = error_message)
 
+@app.route('/signup', methods = ['GET'])
+def signup():
+    if request.method == 'GET':
+        message = 'Please sign up for our service.'
+        return render_template('signup.html', message = message)
+    else:
+        username = request.form["username"]
+        password = request.form["password"]
+        favorite_color = request.form["favorite_color"]
+        message = model.signup(username, password, favorite_color)
+        return render_template('signup.html', message = message)
+
 @app.route('/about', methods = ['GET'])
 def about():
     return render_template('about.html')

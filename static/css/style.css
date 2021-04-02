@@ -3,8 +3,8 @@ h1 {
 }
 
 body {
-    /* background-color: lightslategray; */
-    background-image: url(../images/Drum_Head.JPG);
+    background-color: lightslategray; 
+    /* background-image: url(../images/Drum_Head.JPG);*/
 }
 p {
     color: goldenrod;

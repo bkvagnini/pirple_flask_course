@@ -1,17 +1,13 @@
 {% extends "structure.html" %}
 {% block main %}
-        <h1>Want to try The Thunderdome?</h1> 
-        <p> 2 men enter</p>
-        <p> 1 man leaves...</p>
-        <img src= "static/images/Flea_Bird.JPG" alt = "FLea Bird" />
-<h2>Sign in!</h2>
-        <form action = "/" method = "post">
+        <h1>Sign up</h1>
+
+        <form action = "/signup" method = "post">
             <input placeholder = 'Username' name = "username" type = "text">
             <input placeholder = 'Password' name = "password" type = "password">
+            <input placeholder = 'Favorite Color' name = "favorite_color" type = "text">
             <input type = "submit">
         </form>
-
-<h2> or <a href = "/signup.html"> sign up!</a></h2>
         <p>{{ message }}</p>
 
 
