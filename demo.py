@@ -22,7 +22,7 @@ def home():
             error_message = 'You have provided the wrong username and password combination...'
             return render_template('index.html', message = error_message)
 
-@app.route('/signup', methods = ['GET'])
+@app.route('/signup', methods = ['GET', 'POST']) # Have to add the POST method once you creeate the signup.html page 
 def signup():
     if request.method == 'GET':
         message = 'Please sign up for our service.'
