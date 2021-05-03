@@ -1,9 +1,15 @@
 {% extends "structure.html" %}
 {% block main %}
         <h1>Homepage</h1> 
-<a href = "/login"> Sign in</a>
-<h2> or <a href = "/signup"> sign up!</a></h2>
-        <p>{{ message }}</p>
+        <p> Welcome to my App!</p>
+        <h2>Log in!</h2>
+        <form action = "/login" method = "post">
+            <input placeholder = 'Username' name = "username" type = "text">
+            <input placeholder = 'Password' name = "password" type = "password">
+            <input type = "submit">
+        </form>
 
+<h2> or <a href = "/signup"> Sign up!</a></h2>
+        <p>{{ message }}</p>
 
   {% endblock main %}

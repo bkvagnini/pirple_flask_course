@@ -17,36 +17,22 @@ def home():
         return render_template('index2.html') 
     return render_template('home.html', message = "Log in or sign up")
 
- @app.route ('/login', methods = ['GET', 'POST'])
- def login():
-     if request.method == 'POST':
+@app.route ('/login', methods = ['GET', 'POST'])
+def login():
+    if request.method == 'POST':
          session.pop('username', None)
          areyouuser = request.form ['username']
          pwd = model.check_pw(areyouuser)
          if request.form['password'] == pwd:
              session['username'] = request.form['username']
              return redirect(url_for('home')) # this string home refers to the home function up above
+    return render_template('index.html')
 
-'''   
-def home(): # original home function
-    if request.method == "GET":
-        return render_template('index.html')
-    else:
-        username = request.form['username']
-        password = request.form['password']
-        #this will normally go into a db
-        db_password = model.check_pw(username)
-        if password == db_password:
-        #if username == "Gordon" and password == "Ramsey":
-            #message = model.show_task('Gordon')
-            message = model.show_color(username) 
-            #this is pulling task from db based on user
-            #return render_template('index2.html', message = 'Login Successful')
-            return render_template('index2.html', message = message)
-        else:
-            error_message = 'You have provided the wrong username and password combination...'
-            return render_template('index.html', message = error_message)
-'''
+@app.before_request
+def before_request():
+    g.username = None
+    if 'username' in session:
+        g.username = session['username']
 
 @app.route('/signup', methods = ['GET', 'POST']) # Have to add the POST method once you creeate the signup.html page 
 def signup():
@@ -68,7 +54,39 @@ def about():
 def contact():
     return render_template('contact.html')
 
+@app.route ('/getsession')
+def getsession():
+    if 'username' in session:
+        return session['username']
+    return redirect(url_for('login'))
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('home'))
+
 if __name__ =='__main__':
     app.run(port = 7000, debug = True)
+
+    '''   
+def home(): # original home function
+    if request.method == "GET":
+        return render_template('index.html')
+    else:
+        username = request.form['username']
+        password = request.form['password']
+        #this will normally go into a db
+        db_password = model.check_pw(username)
+        if password == db_password:
+        #if username == "Gordon" and password == "Ramsey":
+            #message = model.show_task('Gordon')
+            message = model.show_color(username) 
+            #this is pulling task from db based on user
+            #return render_template('index2.html', message = 'Login Successful')
+            return render_template('index2.html', message = message)
+        else:
+            error_message = 'You have provided the wrong username and password combination...'
+            return render_template('index.html', message = error_message)
+'''
 
 
