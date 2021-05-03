@@ -32,6 +32,27 @@ def check_pw(username):
     connection.close()
     return password
 
+def check_users(): #this is for user login, logout and session management
+    #connect the db
+    connection = sqlite3.connect('Flask_tut.db', check_same_thread = False)
+    cursor = connection.cursor()
+    
+    # SQL Query
+    cursor.execute(""" SELECT username FROM users ORDER BY pk DESC;""")
+    db_users = cursor.fetchall() # gives a list of lists
+    users = []
+
+    for i in range (len(db_users)):
+        person = db_users[i][0] #gets the first item for each user (which should be username)
+        users.append(person) # adds the username to the users list
+
+    #close the DB connection
+    connection.commit()
+    cursor.close()
+    connection.close()
+    
+    return users
+
 
 def signup(username, password, favorite_color):
     #connect the db

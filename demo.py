@@ -1,9 +1,34 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, redirect, url_for, g
+# session, redirect, url_for, g are new
 import model
 
 app = Flask(__name__)
-@app.route('/', methods = ['GET', 'POST'])
+app.secret_key = 'jumpingjacks' # this is just for demo purposes - needs to be a string
+
+username = ''
+user = model.check_users()
+
+
+#@app.route('/', methods = ['GET', 'POST'])
+@app.route('/', methods = ['GET'])
 def home():
+    if 'username' in session:
+        g.user = session['username'] #g is the global variable for Flask
+        return render_template('index2.html') 
+    return render_template('home.html', message = "Log in or sign up")
+
+ @app.route ('/login', methods = ['GET', 'POST'])
+ def login():
+     if request.method == 'POST':
+         session.pop('username', None)
+         areyouuser = request.form ['username']
+         pwd = model.check_pw(areyouuser)
+         if request.form['password'] == pwd:
+             session['username'] = request.form['username']
+             return redirect(url_for('home')) # this string home refers to the home function up above
+
+'''   
+def home(): # original home function
     if request.method == "GET":
         return render_template('index.html')
     else:
@@ -21,6 +46,7 @@ def home():
         else:
             error_message = 'You have provided the wrong username and password combination...'
             return render_template('index.html', message = error_message)
+'''
 
 @app.route('/signup', methods = ['GET', 'POST']) # Have to add the POST method once you creeate the signup.html page 
 def signup():
